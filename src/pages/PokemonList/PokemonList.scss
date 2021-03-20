@@ -1,8 +1,10 @@
 .pokemon-list {
+  padding: 0 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   .pokemon-list-head {
     margin-top: 10px;
+    text-align: center;
     span {
       font-size: 16px;
     }
