@@ -17,7 +17,7 @@ module.exports = {
   output: {
     filename: '[contenthash].js',
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/'
+    publicPath: ''
   },
   module: {
     rules: [
@@ -40,13 +40,15 @@ module.exports = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[contenthash].css'
+    }),
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src", "index.html") }),
     new HotModuleReplacementPlugin()
   ],
   devtool: 'source-map',
   devServer: {
-    contentBase: './dist',
+    contentBase: path.resolve(__dirname, './dist'),
     historyApiFallback: true
   },
 }
