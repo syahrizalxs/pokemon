@@ -1,6 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const { HotModuleReplacementPlugin } = require('webpack')
+
 const path = require('path')
 
 let mode  = 'development'
@@ -14,13 +16,19 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: '[contenthash].js',
-    path: path.resolve(__dirname, './dist')
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/'
   },
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        test: /\.(css|scss|sass)$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', {
+          loader: 'sass-resources-loader',
+          options: {
+            resources: ['./src/assets/styles/_variables.scss']
+          },
+        },]
       },
       {
         test: /\.js$/,
@@ -31,9 +39,14 @@ module.exports = {
       },
     ],
   },
-  plugins: [new MiniCssExtractPlugin(), new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src", "index.html") })],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src", "index.html") }),
+    new HotModuleReplacementPlugin()
+  ],
   devtool: 'source-map',
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    historyApiFallback: true
   },
 }

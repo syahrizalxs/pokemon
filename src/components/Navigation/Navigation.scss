@@ -1,0 +1,20 @@
+.navigation {
+  background-color: $secondary-color;
+  ul {
+    padding: 9px 6px;
+    display: flex;
+    justify-content: center;
+    li {
+      a {
+        color: $text-light;
+        text-decoration: none;
+        padding: 0 4px;
+        font-size: 16px;
+
+        &.active-link {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
