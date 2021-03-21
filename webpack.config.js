@@ -15,15 +15,15 @@ module.exports = {
   mode: mode,
   entry: './src/index.js',
   output: {
-    filename: '[contenthash].js',
+    filename: 'main.js',
     path: path.resolve(__dirname, './dist'),
-    publicPath: ''
+    publicPath: '/'
   },
   module: {
     rules: [
       {
         test: /\.(css|scss|sass)$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', {
+        use: [mode === 'dev' ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader', {
           loader: 'sass-resources-loader',
           options: {
             resources: ['./src/assets/styles/_variables.scss']
@@ -36,12 +36,12 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         },
-      },
+      }
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[contenthash].css'
+      filename: 'main.css'
     }),
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src", "index.html") }),
     new HotModuleReplacementPlugin()

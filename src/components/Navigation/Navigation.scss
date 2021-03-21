@@ -1,5 +1,9 @@
 .navigation {
   background-color: $secondary-color;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+
   ul {
     padding: 9px 6px;
     display: flex;
@@ -9,12 +13,19 @@
         color: $text-light;
         text-decoration: none;
         padding: 0 4px;
-        font-size: 16px;
+        font-size: 18px;
+        text-transform: uppercase;
 
         &.active-link {
           color: $primary-color;
         }
       }
     }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .navigation {
+    position: relative;
   }
 }

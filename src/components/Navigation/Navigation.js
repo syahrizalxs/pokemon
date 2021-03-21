@@ -5,7 +5,7 @@ import './Navigation.scss'
 
 const menus = [
   { name: 'Pokemons', path: '/pokemon-list' },
-  { name: 'My Catch', path: '/my-catch' }
+  { name: 'My-Catch', path: '/my-catch' }
 ]
 
 function Navigation() {
