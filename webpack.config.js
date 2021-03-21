@@ -1,4 +1,3 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const { HotModuleReplacementPlugin } = require('webpack')
@@ -23,7 +22,7 @@ module.exports = {
     rules: [
       {
         test: /\.(css|scss|sass)$/i,
-        use: [mode === 'dev' ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader', {
+        use: ['style-loader', 'css-loader', 'sass-loader', {
           loader: 'sass-resources-loader',
           options: {
             resources: ['./src/assets/styles/_variables.scss']
@@ -40,9 +39,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'main.css'
-    }),
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src", "index.html") }),
     new HotModuleReplacementPlugin()
   ],
