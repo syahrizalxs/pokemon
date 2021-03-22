@@ -11,13 +11,12 @@ import { useHistory } from 'react-router'
 
 
 export default function PokemonList() {
-  const { loading, error, data } = useQuery(GET_ALL_POKEMONS, { variables: { limit: 10 } })
+  const { loading, error, data } = useQuery(GET_ALL_POKEMONS, { variables: { limit: 20 } })
   
   const [pokemons, setPokemons] = useState([])
   const history = useHistory()
   
   useEffect(() => {
-    console.log(data)
     setPokemons(data)
   }, [data])
 
@@ -26,7 +25,7 @@ export default function PokemonList() {
 
   const detailPokemon = (item) => {
     console.log(item)
-    history.push(`/detail/${item.name}`)
+    history.push(`/pokemon-detail/${item.name}`)
   }
 
   return (

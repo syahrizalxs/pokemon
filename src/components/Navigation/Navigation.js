@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import './Navigation.scss'
 
 const menus = [
-  { name: 'Pokemons', path: '/pokemon-list' },
+  { name: 'Pokemons', path: '/pokemon' },
   { name: 'My-Catch', path: '/my-catch' }
 ]
 
