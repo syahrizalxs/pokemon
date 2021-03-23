@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const WorkboxPlugin = require('workbox-webpack-plugin')
 const { HotModuleReplacementPlugin } = require('webpack')
 
 const path = require('path')
@@ -16,7 +16,8 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/'
+    publicPath: '/',
+    clean: true
   },
   module: {
     rules: [
@@ -39,7 +40,14 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src", "index.html") }),
+    new HtmlWebpackPlugin({ 
+      template: path.resolve(__dirname, "src", "index.html"),
+      favicon: './src/assets/icon.ico'
+    }),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
+    }),
     new HotModuleReplacementPlugin()
   ],
   devtool: 'source-map',

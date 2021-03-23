@@ -20,7 +20,7 @@ export default function PokemonList() {
     setPokemons(data)
     console.log({ data })
   }, [data])
-  const loader = [1, 2, 3, 4 ,5 ,6]
+  const loader = [1, 2, 3, 4 ,5 , 6, 7, 8]
   if (error) return `Error! ${error.message}`;
 
   const detailPokemon = (item) => {
@@ -31,7 +31,7 @@ export default function PokemonList() {
     <main>
       <div className="pokemon-list">
         <div className="pokemon-list-head">
-          <span>Here's all the pokemon!</span>
+          <span>These are all the pokemon!</span>
         </div>
         <div className='pokemon-list-items'>
           {pokemons && pokemons.pokemons && pokemons.pokemons.results.map((item, index) => {
@@ -41,13 +41,14 @@ export default function PokemonList() {
               `} 
               key={index}
               image={item.image}
-              name={item.name} 
+              name={item.name}
+              url={item.url}
               onClick={() => { detailPokemon(item) }}
               />
           })}
           {
-            !pokemons && loader.map(item => {
-              return <Card />
+            !pokemons && loader.map((item, index) => {
+              return <Card key={index} />
             })
           }
         </div> 
