@@ -18,7 +18,6 @@ export default function PokemonList() {
   
   useEffect(() => {
     setPokemons(data)
-    console.log({ data })
   }, [data])
   const loader = [1, 2, 3, 4 ,5 , 6, 7, 8]
   if (error) return `Error! ${error.message}`;

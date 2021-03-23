@@ -24,8 +24,6 @@ function DetailedPokemon() {
     let dapetPokemon = 0
     let gakDapet = 0
 
-    console.log({ dapetPokemon, gakDapet })
-  
 
   }
   

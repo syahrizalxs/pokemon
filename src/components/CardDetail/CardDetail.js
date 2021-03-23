@@ -4,7 +4,6 @@ import './CardDetail.scss'
 
 function CardDetail({ props, image, onClick }) {
   useEffect(() => {
-    console.log({ props })
   }, [])
 
   return (

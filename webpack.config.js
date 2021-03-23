@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { HotModuleReplacementPlugin } = require('webpack')
 
 const path = require('path')
@@ -47,6 +48,11 @@ module.exports = {
     new WorkboxPlugin.GenerateSW({
       clientsClaim: true,
       skipWaiting: true
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './manifest.json', to: 'manifest' }
+      ]
     }),
     new HotModuleReplacementPlugin()
   ],

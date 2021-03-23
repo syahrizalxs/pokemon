@@ -4,8 +4,6 @@ import React from 'react'
 import './Card.scss'
 
 function Card({ name, image, url, onClick }) {
-  console.log({ url })
-
   const GetNumberOfPokemon = (url) => {
     if (!url) return
     const arr = url.split('/')
