@@ -18,14 +18,13 @@ export default function PokemonList() {
   
   useEffect(() => {
     setPokemons(data)
+    console.log({ data })
   }, [data])
-
-  if (loading) return 'Loading...';
+  const loader = [1, 2, 3, 4 ,5 ,6]
   if (error) return `Error! ${error.message}`;
 
   const detailPokemon = (item) => {
-    console.log(item)
-    history.push(`/pokemon-detail/${item.name}`)
+    history.push({ pathname: `/pokemon-detail/${item.name}`, state: { params: item }} )
   }
 
   return (
@@ -46,6 +45,11 @@ export default function PokemonList() {
               onClick={() => { detailPokemon(item) }}
               />
           })}
+          {
+            !pokemons && loader.map(item => {
+              return <Card />
+            })
+          }
         </div> 
       </div>
     </main>

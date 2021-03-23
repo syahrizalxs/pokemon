@@ -3,13 +3,13 @@ import { css } from '@emotion/css'
 import { useHistory } from 'react-router'
 // import backIcon from '../../assets/icon/back-icon.svg'
 
-function BackButton() {
+function BackButton({ className }) {
   const history = useHistory()
   return (
-    <div className="back-button">
+    <div className={className}>
       <span className={css`
         text-decoration: underline;
-        margin-left: 4px;
+        margin-left: 8px;
       `}
       onClick={() => history.goBack()}
       >Back</span>

@@ -10,7 +10,6 @@ import { ApolloProvider } from '@apollo/client'
 
 import { client } from './GraphQL/index'
 import DetailedPokemon from './pages/Pokemon/DetailedPokemon'
-import { css } from '@emotion/css'
 
 function App() {
   return (
@@ -19,7 +18,7 @@ function App() {
         <Navigation />
           <Switch>
             <Route path="/pokemon" exact component={PokemonList} />
-            <Route path="/my-catch" exact component={() => 'My Catch page soon'} />
+            <Route path="/my-pokemon" exact component={() => 'My Catch page soon'} />
             <Route path="/pokemon-detail/:id" exact component={DetailedPokemon} />
             <Route path="/" render={() => <Redirect to='/pokemon' />} />
             <Route component={() => 404} />

@@ -1,5 +1,6 @@
 .navigation {
-  background-color: $secondary-color;
+  // background-color: $secondary-color;
+  background-color: rgb(238, 238, 238);
   position: fixed;
   bottom: 0;
   width: 100vw;
@@ -10,7 +11,7 @@
     justify-content: center;
     li {
       a {
-        color: $text-light;
+        color: $secondary-color;
         text-decoration: none;
         padding: 0 4px;
         font-size: 18px;
@@ -26,6 +27,8 @@
 
 @media screen and (min-width: 481px) {
   .navigation {
-    position: relative;
+    position: fixed;
+    top: 0;
+    height: 32px;
   }
 }
