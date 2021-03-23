@@ -51,7 +51,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: './manifest.json', to: 'manifest' }
+        { from: './manifest.json', to: 'manifest' },
+        { from: './src/assets/logo.png', to: 'icon' }
       ]
     }),
     new HotModuleReplacementPlugin()

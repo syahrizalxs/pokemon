@@ -3,7 +3,7 @@
   "name": "Pokemon Dex",
   "icons": [
     {
-      "src": "./src/assets/logo.png",
+      "src": "./icon/logo.png",
       "type": "image/png",
       "sizes": "256x256"
     }
