@@ -7,7 +7,15 @@ function Card({ name, image, onClick }) {
   return (
     <div className="card" onClick={onClick}>
       <div className="image-card">
-        {image && <img className="image" src={image} alt={name}></img>}
+        { image && 
+          <img 
+            className="image" 
+            rel="preload"
+            as="image"
+            src={image}
+            alt={name}
+          ></img>
+        }
         <span></span>
       </div>
       <div className="detail-card">
