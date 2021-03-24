@@ -18,7 +18,7 @@ function App() {
         <Navigation />
           <Switch>
             <Route path="/pokemon" exact component={PokemonList} />
-            <Route path="/my-pokemon" exact component={() => 'My Catch page soon'} />
+            <Route path="/my-pokemon" exact component={PokemonList} />
             <Route path="/pokemon-detail/:id" exact component={DetailedPokemon} />
             <Route path="/" render={() => <Redirect to='/pokemon' />} />
             <Route component={() => 404} />

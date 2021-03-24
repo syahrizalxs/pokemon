@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import './CardDetail.scss'
 
-function CardDetail({ props, image, onClick }) {
+function CardDetail({ props, onClick }) {
   useEffect(() => {
   }, [])
 
@@ -10,31 +10,36 @@ function CardDetail({ props, image, onClick }) {
     <div>
       <div className="card-detail">
         <div className="image-card-detail">
-          <img src={`https://pokeres.bastionbot.org/images/pokemon/${
+          {props &&  <img src={`https://pokeres.bastionbot.org/images/pokemon/${
 							props.id
 						}.png`} alt={props.name}></img>
+          }
+        </div>
+        <div className="detail-card-action">
+          <button className="catch-button" onClick={onClick}>
+            <span>CATCH</span>
+          </button>
         </div>
         <div className="detail-card-detail">
-          <span>{props.name}</span>
-          <p>Abilities</p>
-          <ul>
-           {
-            props.abilities.map((item, index) => {
-              return <li key={index}>- {item.ability.name}</li>
-            })
-           } 
-          </ul>
+          <span className="pokemon-name">{props.name}</span>
+          <div className="abilities">
+            <span>abilities</span>
+            <ul>
+            {
+              props.abilities.map((item, index) => {
+                return <span className="tag" key={index}>{item.ability.name}</span>
+              })
+            } 
+            </ul>
+          </div>
 
           <p>Moves: {props.moves.length}</p>
           <p>Types</p>
           {
             props.types.map((item, index) => {
-              return <li key={index}>{item.type.name}</li>
+              return <span className="tag" key={index}>{item.type.name}</span>
             })
           }
-        </div>
-        <div className="detail-card-action">
-          <button className="catch-button" onClick={onClick}>Catch the pokemon!</button>
         </div>
       </div>
     </div>

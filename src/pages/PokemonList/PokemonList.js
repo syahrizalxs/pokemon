@@ -8,22 +8,35 @@ import { GET_ALL_POKEMONS } from '../../GraphQL/queries/pokemons'
 import { useQuery } from '@apollo/client'
 import Card from '../../components/Card/Card'
 import { useHistory } from 'react-router'
+import DetailedPokemon from '../Pokemon/DetailedPokemon'
 
+const isSmallDevice = window.screen.width < 600
 
 export default function PokemonList() {
-  const { loading, error, data } = useQuery(GET_ALL_POKEMONS, { variables: { limit: 20 } })
-  
+  const { loading, error, data } = useQuery(GET_ALL_POKEMONS, { variables: { limit: isSmallDevice ? 20 : 40 } })
   const [pokemons, setPokemons] = useState([])
+  const [showDetail, setShowDetail] = useState(false)
+  const [name, setName] = useState('')
+  
+
+
   const history = useHistory()
   
   useEffect(() => {
     setPokemons(data)
   }, [data])
-  const loader = [1, 2, 3, 4 ,5 , 6, 7, 8]
+
+  const skeletonLoader = [1, 2, 3, 4 ,5 , 6, 7, 8]
+  
   if (error) return `Error! ${error.message}`;
 
   const detailPokemon = (item) => {
-    history.push({ pathname: `/pokemon-detail/${item.name}`, state: { params: item }} )
+    setShowDetail(true)
+    setName(item.name)
+  }
+
+  const onDetailClick = (value) => {
+    setShowDetail(value)
   }
 
   return (
@@ -46,11 +59,14 @@ export default function PokemonList() {
               />
           })}
           {
-            !pokemons && loader.map((item, index) => {
+            !pokemons && skeletonLoader.map((item, index) => {
               return <Card key={index} />
             })
           }
         </div> 
+      </div>
+      <div className="pokemon-detail">
+        { showDetail && <DetailedPokemon name={name} onShowUpdate={onDetailClick} /> }
       </div>
     </main>
   )
