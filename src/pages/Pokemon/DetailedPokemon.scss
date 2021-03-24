@@ -17,7 +17,8 @@
     height: 30px;
     justify-content: flex-end;
     span {
-      color: #ccc;
+      color: #000;
+      cursor: pointer;
       font-weight: bold;
       border-radius: 50%;
       width: 20px;
@@ -26,5 +27,11 @@
       right: 0;
       font-size: 20px;
     }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .detailed-pokemon {
+    width: 60%;
   }
 }

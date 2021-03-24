@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
+import { colorType } from '../../constant/pokemon-type-color'
 
 import './CardDetail.scss'
 
@@ -6,6 +8,30 @@ function CardDetail({ props, onClick }) {
   useEffect(() => {
     console.log({ props })
   }, [props])
+
+  const Form = () => {
+    return (
+      <div className="form">
+        <input placeholder="Nickname"></input>
+        <button className="add-button">ADD</button>
+      </div>
+    )
+  }
+
+  const catchPokemon = (props) => {
+    const number = Math.random()
+    if (number < 0.5) {
+      setShowForm(true)
+      setMessage('Yeay you got this Pokemon!')
+    } else {
+      setMessage('You almost got it! Try Again!')
+    }
+  }
+
+  const [message, setMessage] = useState('')
+  const [showForm, setShowForm] = useState(false)
+  const [nickname, setNickname] = useState('')
+
   return (
     <div>
       <div className="card-detail">
@@ -16,10 +42,17 @@ function CardDetail({ props, onClick }) {
           }
         </div>
         <div className="detail-card-action">
-          <button className="catch-button" onClick={onClick}>
-            <span>CATCH</span>
-          </button>
+          { !showForm && <button className="catch-button" onClick={() => catchPokemon(props)}>
+              <span>CATCH</span>
+            </button>
+          }
         </div>
+        <span className="catch-message" style={{ color: showForm ? 'green' : 'red' }}>
+          { message }
+        </span>
+        {
+          showForm && <Form />
+        }
         <div className="detail-card-detail">
           <span className="pokemon-name">{props.name}</span>
           <div className="abilities">
@@ -46,12 +79,16 @@ function CardDetail({ props, onClick }) {
             </div>
           </div>
 
-          {/* <p>Types</p>
-          {
-            props.types.map((item, index) => {
-              return <span className="tag" key={index}>{item.type.name}</span>
-            })
-          } */}
+          <div className="types">
+            <span>Types</span>
+            <div className="type-list">
+              {
+                props && props.types && props.types.map((item, index) => {
+                  return <span className="tag" style={{backgroundColor: colorType[item.type.name], color: '#fff'}} key={index}>{item.type.name}</span>
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
     </div>

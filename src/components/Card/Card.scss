@@ -10,6 +10,10 @@
   box-shadow: .2px 3px 2.5px rgba(100, 100, 100, 0.5);
   margin: 8px 6px;
 
+  &:hover {
+    box-shadow: .4px 6px 4.5px rgba(100, 100, 100, 0.5);
+  }
+
   .image-card {
     background-color: rgba(247, 246, 246, 0.8);
     // background-color: $secondary-color;

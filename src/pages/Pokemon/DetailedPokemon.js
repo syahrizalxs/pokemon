@@ -20,16 +20,8 @@ function DetailedPokemon({ name, onShowUpdate }) {
   }
   
 
-  const getRandomInt = (max) => {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
-
   const catchPokemon = () => {
-    
-    let dapetPokemon = 0
-    let gakDapet = 0
-
-
+    const number = Math.random()
   }
   
 
@@ -42,7 +34,7 @@ function DetailedPokemon({ name, onShowUpdate }) {
       <div className="close-button">
         <span onClick={() => close()}>x</span>
       </div>
-      {data && data.pokemon && <CardDetail props={data.pokemon}/>}
+      {data && data.pokemon && <CardDetail props={data.pokemon} onClick={catchPokemon}/>}
     </div>
   )
 }
