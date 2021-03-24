@@ -13,7 +13,7 @@ import DetailedPokemon from '../Pokemon/DetailedPokemon'
 const isSmallDevice = window.screen.width < 600
 
 export default function PokemonList() {
-  const { loading, error, data } = useQuery(GET_ALL_POKEMONS, { variables: { limit: isSmallDevice ? 20 : 40 } })
+  const { loading, error, data } = useQuery(GET_ALL_POKEMONS, { variables: { limit: isSmallDevice ? 50 : 100 } })
   const [pokemons, setPokemons] = useState([])
   const [showDetail, setShowDetail] = useState(false)
   const [name, setName] = useState('')

@@ -4,8 +4,8 @@ import './CardDetail.scss'
 
 function CardDetail({ props, onClick }) {
   useEffect(() => {
-  }, [])
-
+    console.log({ props })
+  }, [props])
   return (
     <div>
       <div className="card-detail">
@@ -24,22 +24,34 @@ function CardDetail({ props, onClick }) {
           <span className="pokemon-name">{props.name}</span>
           <div className="abilities">
             <span>abilities</span>
-            <ul>
-            {
-              props.abilities.map((item, index) => {
-                return <span className="tag" key={index}>{item.ability.name}</span>
-              })
-            } 
-            </ul>
+            <div className="ability-list">
+              {
+                props.abilities.map((item, index) => {
+                  return <span className="tag" key={index}>{item.ability.name}</span>
+                })
+              } 
+            </div>
+          </div>
+          <div className="moves">
+            <span>moves</span>
+            <div className="move-list">
+              {
+                props.moves.map((item, index) => {
+                  if (index <= 5) {
+                    return <span className="tag" key={index}>{item.move.name}</span>
+                  }
+                })
+              }
+              <span>+{props.moves.length - 6} More</span>
+            </div>
           </div>
 
-          <p>Moves: {props.moves.length}</p>
-          <p>Types</p>
+          {/* <p>Types</p>
           {
             props.types.map((item, index) => {
               return <span className="tag" key={index}>{item.type.name}</span>
             })
-          }
+          } */}
         </div>
       </div>
     </div>
