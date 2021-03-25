@@ -7,7 +7,6 @@ import './PokemonList.scss'
 import { GET_ALL_POKEMONS } from '../../GraphQL/queries/pokemons'
 import { useQuery } from '@apollo/client'
 import Card from '../../components/Card/Card'
-import { useHistory } from 'react-router'
 import DetailedPokemon from '../Pokemon/DetailedPokemon'
 
 import ThemeContext from '../../context/ThemeContext'
@@ -25,6 +24,7 @@ export default function PokemonList() {
   
   useEffect(() => {
     setPokemons(data)
+    console.log({ history })
   }, [data])
 
   const skeletonLoader = [1, 2, 3, 4 ,5 , 6, 7, 8]
@@ -32,6 +32,8 @@ export default function PokemonList() {
   if (error) return `Error! ${error.message}`;
 
   const detailPokemon = (item) => {
+    const el = document.getElementById('pokemon-list')
+    el.style.overflow = 'hidden'
     setShowDetail(true)
     setName(item.name)
   }
@@ -46,7 +48,7 @@ export default function PokemonList() {
         <div className="pokemon-list-head">
           <span>These are all the pokemon!</span>
         </div>
-        <div className='pokemon-list-items'>
+        <div id="pokemon-list" className='pokemon-list-items'>
           {pokemons && pokemons.pokemons && pokemons.pokemons.results.map((item, index) => {
             return <Card className={css`
               display: inline-block;
@@ -67,7 +69,7 @@ export default function PokemonList() {
         </div> 
       </div>
       <div className="pokemon-detail">
-        { showDetail && <DetailedPokemon name={name} onShowUpdate={onDetailClick} /> }
+        { showDetail && <DetailedPokemon name={name} isFromMyPokemon={false} onShowUpdate={onDetailClick} /> }
       </div>
     </main>
   )

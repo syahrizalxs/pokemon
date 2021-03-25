@@ -8,20 +8,19 @@ import { GET_POKEMON_DETAIL } from '../../GraphQL/queries/pokemons'
 
 import './DetailedPokemon.scss'
 
-function DetailedPokemon({ name, onShowUpdate }) {
+function DetailedPokemon({ name, onShowUpdate, onDeletePokemon, isFromMyPokemon, nickName }) {
   // const { id } = useParams()
   const { loading, error, data } = useQuery(GET_POKEMON_DETAIL, { variables: { name: name }})
-  
+
+  if (error) return 'Something went wrong!'
+
   const [detail, setDetail] = useState({})
-  const isSmallDevice = window.screen.width < 600
 
   const close = () => {
     onShowUpdate(false)
   }
-  
-
-  const catchPokemon = () => {
-    const number = Math.random()
+  const removePokemon = () => {
+    onDeletePokemon(count => count + 1)
   }
   
 
@@ -34,7 +33,7 @@ function DetailedPokemon({ name, onShowUpdate }) {
       <div className="close-button">
         <span onClick={() => close()}>x</span>
       </div>
-      {data && data.pokemon && <CardDetail props={data.pokemon} onClick={catchPokemon}/>}
+      {data && data.pokemon && <CardDetail props={data.pokemon} isFromMyPokemon={isFromMyPokemon} nickName={nickName} onDoneRemovePokemon={removePokemon} closeDetail={close}/>}
     </div>
   )
 }

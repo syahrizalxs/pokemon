@@ -1,21 +1,52 @@
-import React, { useEffect, useState } from 'react'
+import { css } from '@emotion/css'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { colorType } from '../../constant/pokemon-type-color'
 
+import { getPokemon, savePokemon } from '../../helper/Storage'
+import useModal from '../../Hooks/useModal'
+import Modal from '../../components/Modal/Modal'
+
+
 import './CardDetail.scss'
 
-function CardDetail({ props, onClick }) {
-  useEffect(() => {
-    console.log({ props })
-  }, [props])
+function CardDetail({ props, isFromMyPokemon, nickName, closeDetail, onDoneRemovePokemon }) {
+  const {isShowing, toggle} = useModal();
 
-  const Form = () => {
-    return (
-      <div className="form">
-        <input placeholder="Nickname"></input>
-        <button className="add-button">ADD</button>
-      </div>
-    )
+
+  
+  const [message, setMessage] = useState('')
+  const [showForm, setShowForm] = useState(false)
+  const [nickname, setNickname] = useState('')
+  const [pokemonList, setPokemonList] = useState(getPokemon || [])
+
+  const onAddPokemon = () => {
+    
+    // Handle for new browser because initial value is Null
+    const param = {...props, nickname}
+    if (!pokemonList) {
+      savePokemon([param])
+    } else {
+      
+      // Check if nickname exist
+      const isNickNameExist = pokemonList.filter(item => item.nickname === nickname)
+      if (isNickNameExist.length > 0) {
+        console.log(isNickNameExist)
+        alert('This nickname has been used')
+        return
+      }
+
+      let existingPokemonList = pokemonList
+      existingPokemonList.push(param)
+      savePokemon(existingPokemonList)
+    }
+    setShowForm(false)
+    setNickname('')
+    setMessage('')
+  }
+
+  const onChangeHandler = event => {
+    setNickname(event.target.value);
   }
 
   const catchPokemon = (props) => {
@@ -29,9 +60,53 @@ function CardDetail({ props, onClick }) {
     }
   }
 
-  const [message, setMessage] = useState('')
-  const [showForm, setShowForm] = useState(false)
-  const [nickname, setNickname] = useState('')
+  const releasePokemon = () => {
+    const newPokemonList = pokemonList.filter(item => item.nickname !== nickName)
+
+    // Save to local Storage
+    savePokemon(newPokemonList)
+
+    // Save to state
+    setPokemonList(newPokemonList)
+    
+    onDoneRemovePokemon(count => count + 1)
+    toggle()
+    closeDetail()
+  }
+
+  const checkIfAlreadyHaveSamePokemon = () => {
+    let isExist = []
+    if (!pokemonList) return false
+    if (pokemonList.length > 0) {
+      isExist = pokemonList.filter(item => item.name === props.name)
+    }
+    return isExist.length > 0
+  }
+
+  const DeleteConfirmation = () => {
+    return (
+      <div className={css`
+        display: flex;
+        flex-direction: column;
+      `}>
+        <span>Are you sure want to release this pokemon ?</span>
+        <button 
+          className={css`
+            border: 1px solid red;
+            border-radius: 8px;
+            max-width: 100px;
+            margin: 20px 0;
+            background-color: #fff;
+            text-align: center;
+            align-self: flex-end;
+            color: red;
+          `}
+          onClick={() => releasePokemon()}
+        >Release</button>
+      </div>
+      
+    )
+  }
 
   return (
     <div>
@@ -43,8 +118,14 @@ function CardDetail({ props, onClick }) {
           }
         </div>
         <div className="detail-card-action">
-          { !showForm && <button className="catch-button" onClick={() => catchPokemon(props)}>
+          { !isFromMyPokemon && !showForm &&
+            <button className="catch-button" onClick={() => catchPokemon(props)}>
               <span>CATCH</span>
+            </button>
+          }
+          { isFromMyPokemon &&
+            <button className="catch-button" onClick={toggle}>
+              <span>RELEASE</span>
             </button>
           }
         </div>
@@ -52,10 +133,32 @@ function CardDetail({ props, onClick }) {
           { message }
         </p>
         {
-          showForm && <Form />
+          showForm && (
+            <div className="form">
+              <input placeholder="Nickname" value={nickname} onChange={onChangeHandler}></input>
+              { nickname && <button  className="add-button" onClick={() => onAddPokemon()}>ADD</button> }
+            </div>
+          )
         }
         <div className="detail-card-detail">
           <span className="pokemon-name">{props.name}</span>
+          { 
+            !isFromMyPokemon && checkIfAlreadyHaveSamePokemon() && 
+            <span className={css`
+              text-align: center;
+              margin-top: 4px;
+              color: green;
+            `}>Owned</span>
+          }
+
+          { 
+            isFromMyPokemon && 
+            <span className={css`
+              text-align: center;
+              margin-top: 4px;
+              color: green;
+            `}>{nickName}</span>
+          }
           <div className="abilities">
             <span>abilities</span>
             <div className="ability-list">
@@ -111,6 +214,12 @@ function CardDetail({ props, onClick }) {
           </div>
         </div>
       </div>
+      <Modal 
+        isShowing={isShowing}
+        hide={toggle}
+        content={<DeleteConfirmation />}
+      >
+      </Modal>
     </div>
   )
 }
