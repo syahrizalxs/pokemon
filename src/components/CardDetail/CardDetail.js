@@ -19,6 +19,7 @@ function CardDetail({ props, onClick }) {
   }
 
   const catchPokemon = (props) => {
+    setMessage('')
     const number = Math.random()
     if (number < 0.5) {
       setShowForm(true)
@@ -47,9 +48,9 @@ function CardDetail({ props, onClick }) {
             </button>
           }
         </div>
-        <span className="catch-message" style={{ color: showForm ? 'green' : 'red' }}>
+        <p className="catch-message" style={{ color: showForm ? 'green' : 'red' }}>
           { message }
-        </span>
+        </p>
         {
           showForm && <Form />
         }
@@ -70,12 +71,11 @@ function CardDetail({ props, onClick }) {
             <div className="move-list">
               {
                 props.moves.map((item, index) => {
-                  if (index <= 5) {
+                  if (index) {
                     return <span className="tag" key={index}>{item.move.name}</span>
                   }
                 })
               }
-              <span>+{props.moves.length - 6} More</span>
             </div>
           </div>
 
@@ -85,6 +85,26 @@ function CardDetail({ props, onClick }) {
               {
                 props && props.types && props.types.map((item, index) => {
                   return <span className="tag" style={{backgroundColor: colorType[item.type.name], color: '#fff'}} key={index}>{item.type.name}</span>
+                })
+              }
+            </div>
+          </div>
+
+          <div className="stats">
+            <span>Stats</span>
+            <div className="stat-list">
+              {
+                props && props.stats && props.stats.map((item, index) => {
+                  return (
+                    <div className="stat-container" key={index}>
+                      <div className="stat-type">
+                        <span>{item.stat.name}</span>
+                        <span>{item.base_stat}</span>
+                      </div>
+                      <div className="stat-detail" style={{width: `${item.base_stat / 2}%`}}>
+                      </div>
+                    </div>
+                  )
                 })
               }
             </div>

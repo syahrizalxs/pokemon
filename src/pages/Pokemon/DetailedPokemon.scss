@@ -1,23 +1,28 @@
 .detailed-pokemon {
   position: fixed;
+  overflow-y: auto;
   bottom: 0;
+  clear: both;
   z-index: 3;
-  width: 90%;
+  width: 100%;
   height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  // left: 50%;
+  // transform: translateX(-50%);
   background-color: #fff;
   border-radius: 8px;
   border: .5px solid #ccc;
-  margin-bottom: -10px;
+  // margin-bottom: -10px;
 
   .close-button {
     display: flex;
+    position: fixed;
+    top: 10px;
     width: 100%;
+    right: 10px;
     height: 30px;
     justify-content: flex-end;
     span {
-      color: #000;
+      color: $secondary-color;
       cursor: pointer;
       font-weight: bold;
       border-radius: 50%;
@@ -25,13 +30,17 @@
       text-align: center;
       padding: 4px;
       right: 0;
-      font-size: 20px;
+      font-size: 24px;
     }
   }
 }
 
 @media only screen and (min-width: 600px) {
   .detailed-pokemon {
-    width: 60%;
+    width: 100%;
+
+    .close-button {
+      margin-right: 10px;
+    }
   }
 }

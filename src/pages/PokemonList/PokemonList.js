@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import { css } from '@emotion/css'
 
@@ -10,7 +10,10 @@ import Card from '../../components/Card/Card'
 import { useHistory } from 'react-router'
 import DetailedPokemon from '../Pokemon/DetailedPokemon'
 
+import ThemeContext from '../../context/ThemeContext'
+
 const isSmallDevice = window.screen.width < 600
+
 
 export default function PokemonList() {
   const { loading, error, data } = useQuery(GET_ALL_POKEMONS, { variables: { limit: isSmallDevice ? 50 : 100 } })
@@ -18,9 +21,7 @@ export default function PokemonList() {
   const [showDetail, setShowDetail] = useState(false)
   const [name, setName] = useState('')
   
-
-
-  const history = useHistory()
+  const themeContext = useContext(ThemeContext)
   
   useEffect(() => {
     setPokemons(data)

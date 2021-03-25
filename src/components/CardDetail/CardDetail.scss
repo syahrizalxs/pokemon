@@ -6,6 +6,14 @@
   margin: 0 auto;
   overflow-y: none;
 
+  .catch-message {
+    justify-content: center;
+    color: red;
+    text-align: center;
+    margin-top: 5px;
+    width: 100% !important;
+  }
+
   .image-card-detail {
     background-color: rgb(247, 246, 246);
     border-radius: 50%;
@@ -95,6 +103,50 @@
         }
       }
     }
+
+    .stats {
+      margin-top: 12px;
+      span {
+        font-size: 18px;
+        color: $secondary-color;
+        text-transform: capitalize;
+      }
+      .stat-list {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-top: 5px;
+        
+        .stat-container {
+          margin-bottom: 5px;
+          background-color: rgba(204, 204, 204, 0.439);
+          padding: 6px 5px;
+          border-radius: 10px;
+
+          .stat-type {
+            display: flex;
+            justify-content: space-between;
+            span {
+              font-size: 12px;
+              margin:0 6px;
+              text-align: left;
+            }
+            font-weight: bold;
+            color: rgb(43, 43, 43);
+          }
+
+          .stat-detail {
+            width: 92%;
+            background-color: $secondary-color;
+            height: 4px;
+            border-radius: 4px;
+            margin:0 6px;
+            content: '';
+            margin-top: 8px;
+          }
+        }
+      }
+    }
   }
 
   .detail-card-action {
@@ -123,7 +175,7 @@
 
 
 .tag {
-  background-color: #ccc;
+  background-color: rgba(204, 204, 204, 0.439);
   border-radius: 8px;
   padding: 2px 6px;
   font-size: 12px !important;
@@ -138,6 +190,7 @@
     border: 1px solid $secondary-color;
     border-radius: 8px;
     margin-right: 10px;
+    color: $secondary-color;
     outline: none;
   }
 
@@ -153,12 +206,6 @@
     margin: 0 auto;
     justify-content: center; 
   }
-}
-
-.catch-message {
-  color: red;
-  text-align: center;
-  margin-top: 5px;
 }
 
 @media only screen and (min-width: 600px) {
