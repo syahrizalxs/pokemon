@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { css } from '@emotion/css'
 
@@ -7,6 +7,7 @@ import Card from '../../components/Card/Card'
 import DetailedPokemon from '../Pokemon/DetailedPokemon'
 import { getPokemon } from '../../helper/Storage'
 import { useHistory } from 'react-router-dom'
+import PokemonList from '../PokemonList/PokemonList'
 
 export default function MyPokemonList() {
   const [pokemonList, setPokemonList] = useState(getPokemon || [])
@@ -15,6 +16,10 @@ export default function MyPokemonList() {
   const [nickName, setNickname] = useState('')
 
   let history = useHistory()
+
+  useEffect(() => {
+    if (getPokemon === null) setPokemonList([])
+  }, [PokemonList])
 
   const onDoneRemove = () => {
     setPokemonList(getPokemon)
