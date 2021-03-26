@@ -14,13 +14,9 @@ export default function MyPokemonList() {
   const [name, setName] = useState('')
   const [nickName, setNickname] = useState('')
 
-  // use for trigger render
-  const [count, setCount] = useState(0)
-
   let history = useHistory()
 
   const onDoneRemove = () => {
-    setCount(count + 1)
     setPokemonList(getPokemon)
   }
 

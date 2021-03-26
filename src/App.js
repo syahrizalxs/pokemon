@@ -1,11 +1,11 @@
-import React, { lazy } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import Navigation from './components/Navigation/Navigation'
 
 import './assets/styles/main.scss'
 
-const PokemonList = lazy(() => require('./pages/PokemonList/PokemonList'))
-const MyPokemonList = lazy(() => require('./pages/MyPokemonList/MyPokemonList'))
+import PokemonList from './pages/PokemonList/PokemonList'
+import MyPokemonList from './pages/MyPokemonList/MyPokemonList'
 
 import { ApolloProvider } from '@apollo/client'
 
