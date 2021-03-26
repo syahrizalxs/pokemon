@@ -1,8 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { css } from '@emotion/css'
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router'
-import BackButton from '../../components/BackButton/BackButton'
 import CardDetail from '../../components/CardDetail/CardDetail'
 import { GET_POKEMON_DETAIL } from '../../GraphQL/queries/pokemons'
 
@@ -10,7 +7,7 @@ import './DetailedPokemon.scss'
 
 function DetailedPokemon({ name, onShowUpdate, onDeletePokemon, isFromMyPokemon, nickName }) {
   // const { id } = useParams()
-  const { loading, error, data } = useQuery(GET_POKEMON_DETAIL, { variables: { name: name }})
+  const { error, data } = useQuery(GET_POKEMON_DETAIL, { variables: { name: name }})
 
   if (error) return 'Something went wrong!'
 

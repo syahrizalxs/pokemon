@@ -9,8 +9,6 @@ import { useQuery } from '@apollo/client'
 import Card from '../../components/Card/Card'
 import DetailedPokemon from '../Pokemon/DetailedPokemon'
 
-import ThemeContext from '../../context/ThemeContext'
-
 const isSmallDevice = window.screen.width < 600
 
 
@@ -19,8 +17,7 @@ export default function PokemonList() {
   const [pokemons, setPokemons] = useState([])
   const [showDetail, setShowDetail] = useState(false)
   const [name, setName] = useState('')
-  
-  const themeContext = useContext(ThemeContext)
+
   
   useEffect(() => {
     setPokemons(data)
