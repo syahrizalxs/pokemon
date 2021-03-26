@@ -18,7 +18,8 @@
         text-transform: uppercase;
 
         &.active-link {
-          color: $primary-color;
+          background-color: #fff;
+          border-radius: 6px;
         }
       }
     }
