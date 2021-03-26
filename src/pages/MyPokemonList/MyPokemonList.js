@@ -10,16 +10,12 @@ import { useHistory } from 'react-router-dom'
 import PokemonList from '../PokemonList/PokemonList'
 
 export default function MyPokemonList() {
-  const [pokemonList, setPokemonList] = useState(getPokemon || [])
+  const [pokemonList, setPokemonList] = useState(getPokemon)
   const [showDetail, setShowDetail] = useState(false)
   const [name, setName] = useState('')
   const [nickName, setNickname] = useState('')
-
+  
   let history = useHistory()
-
-  useEffect(() => {
-    if (getPokemon === null) setPokemonList([])
-  }, [PokemonList])
 
   const onDoneRemove = () => {
     setPokemonList(getPokemon)
@@ -54,10 +50,10 @@ export default function MyPokemonList() {
     <main>
       <div className="pokemon-list">
         <div className="pokemon-list-head">
-          { pokemonList && pokemonList.length > 0 && <span>My Pokemon List!</span>}
+          { pokemonList.length > 0 && <span>My Pokemon List!</span>}
         </div>
         <div id="pokemon-list" className='pokemon-list-items'>
-          { pokemonList && pokemonList.length > 0 && pokemonList.map((item, index) => {
+          { pokemonList.length > 0 && pokemonList.map((item, index) => {
             return <Card className={css`
               display: inline-block;
               margin: .3rem 1rem;

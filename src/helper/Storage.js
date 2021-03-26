@@ -1,7 +1,7 @@
 const KEY = 'POKEMON'
 
 export function getPokemon () {
-  return JSON.parse(localStorage.getItem(KEY))
+  return JSON.parse(localStorage.getItem(KEY)) || []
 }
 
 export function savePokemon (data) {
